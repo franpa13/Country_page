@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 import "./TableSearch.css"
+import FilteredTable from '../FilteredTable/FilteredTable';
 
-export default function TableSearch({ allCountries, busqueda }) {
+export default function TableSearch({ allCountries, busqueda, formData }) {
+    
     const [elementosSinEncontrar, setElementosSinEncontrar] = useState(0)
     const countriesPerPage = 10;
     console.log(busqueda, "esto es busqueda");
@@ -43,45 +45,51 @@ export default function TableSearch({ allCountries, busqueda }) {
     const startIndex = (currentPage - 1) * countriesPerPage;
     const endIndex = Math.min(startIndex + countriesPerPage, allCountries && allCountries.length);
     return (
+
         <div className='p-2 flex flex-col  justify-center items-center md:justify-start md:mb-12  md:w-2/3 md:p-3'>
-            <table className='w-full'>
-                <thead className='border-b border-gray-700 text-center mb-4'>
-                    <tr className='py-2 '>
-                        <th className='text-xs w-1/4 md:text-xs text-gray-500 p-3 '>Flag</th>
-                        <th className='text-xs w-1/4 md:text-xs text-gray-500'>Name</th>
-                        <th className='text-xs w-1/4 md:text-xs text-gray-500'>Population</th>
-                        <th className='text-xs w-1/4 md:text-xs text-gray-500'>Area (km²)</th>
-                    </tr>
-                </thead>
-                <tbody className="relative">
-                    {filteredCountries.length > 0 ? filteredCountries.slice(startIndex, endIndex).map((country) => {
-                        return (
+            {busqueda ? (
+                <table className='w-full'>
+                    <thead className='border-b border-gray-700 text-center mb-4'>
+                        <tr className='py-2 '>
+                            <th className='text-xs w-1/4 md:text-xs text-gray-500 p-3 '>Flag</th>
+                            <th className='text-xs w-1/4 md:text-xs text-gray-500'>Name</th>
+                            <th className='text-xs w-1/4 md:text-xs text-gray-500'>Population</th>
+                            <th className='text-xs w-1/4 md:text-xs text-gray-500'>Area (km²)</th>
+                        </tr>
+                    </thead>
+                    <tbody className="relative">
+                        {filteredCountries.length > 0 ? filteredCountries.slice(startIndex, endIndex).map((country) => {
+                            return (
 
 
-                            <tr className='animate-fade-in-up hover:bg-gray-400' key={country.name.common}>
-                                <td className='py-5 text-xs text-center flex justify-center items-center'>
-                                    <img className='w-1/3 md:w-1/4 rounded-sm' src={country.flags.png} alt="" />
-                                </td>
-                                <td className='text-xs py-5 text-semibold text-center md:text-sm'>{country.name.common}</td>
-                                <td className='text-xs py-5 text-semibold text-center md:text-sm'>{country.population}</td>
-                                <td className='text-xs py-5 text-semibold text-center md:text-sm'>{country.area}</td>
+                                <tr className='animate-fade-in-up hover:bg-gray-400' key={country.name.common}>
+                                    <td className='py-5 text-xs text-center flex justify-center items-center'>
+                                        <img className='w-1/3 md:w-1/4 rounded-sm' src={country.flags.png} alt="" />
+                                    </td>
+                                    <td className='text-xs py-5 text-semibold text-center md:text-sm'>{country.name.common}</td>
+                                    <td className='text-xs py-5 text-semibold text-center md:text-sm'>{country.population}</td>
+                                    <td className='text-xs py-5 text-semibold text-center md:text-sm'>{country.area}</td>
 
 
 
-                            </tr>
+                                </tr>
 
-                        )
-                    }) : (
-                        <p className=' text-center absolute w-1/2 left-1/4 right-1/4  md:w-auto  top-12 md:left-1/3 md:right-1/3 text-gray-500 font-semibold animate-zoom-in md:text-lg'>No se encontraron resultados...</p>
-                    )}
-                </tbody>
-            </table>
+                            )
+                        }) : (
+                            <p className=' text-center absolute w-1/2 left-1/4 right-1/4  md:w-auto  top-12 md:left-1/3 md:right-1/3 text-gray-500 font-semibold animate-zoom-in md:text-lg'>No se encontraron resultados...</p>
+                        )}
+                    </tbody>
+                </table>
+            ) : (
+                <FilteredTable allCountries= {allCountries} formData = {formData}></FilteredTable>
+            )}
+
             <p className='w-full flex justify-center items-center'>
                 {filteredCountries.length >= 1 && (
                     <Box sx={{ width: "80%", display: "flex", flexDirection: "column", gap: "20px" }}>
                         {[...Array(elementosSinEncontrar)].map((_, index) => (
                             <div className='w-full flex justify-between gap-10' key={index}>
-                                <Skeleton variant="circular" width={40} height={40} sx={{backgroundColor: "#383838" }}   />
+                                <Skeleton variant="circular" width={40} height={40} sx={{ backgroundColor: "#383838" }} />
                                 <Skeleton variant="text" sx={{ fontSize: '1rem', width: "100%", backgroundColor: "#383838" }} />
 
                             </div>

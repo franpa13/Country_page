@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Fathercomponent.css"
 import { CiSearch } from "react-icons/ci";
 import Checkbox from '@mui/material/Checkbox';
+import FilteredTable from '../FilteredTable/FilteredTable';
 import Table from '../Table/Table';
 import TableSearch from '../TableSearch/TableSearch';
 
@@ -18,6 +19,9 @@ export default function Fathercomponent({ allCountries }) {
         independent: false
     });
 
+
+
+
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
         const newValue = type === 'checkbox' ? checked : value;
@@ -26,11 +30,12 @@ export default function Fathercomponent({ allCountries }) {
             [name]: newValue
         });
     };
-console.log(formData , "esto es formData");
-    return (
-        <section className='flex justify-center sm:justify-center md:justify-center  rounded-lg md:items-start '>
 
-            <div className='father flex flex-col  md:absolute md:top-1/3  md:mx-auto rounded-lg mb-12 md:w-11/12 md:flex-row' >
+    return (
+
+        <section className='flex justify-center sm:justify-center md:justify-center  rounded-sm md:items-start md:mb-16 '>
+
+            <div className='father flex flex-col  md:absolute md:top-1/3   rounded-lg mb-12 md:w-11/12 md:flex-row' >
                 <header className='p-2 flex w-full justify-between items-center       sm:justify-center sm:gap-28 md:p-6 md:w-1/3 md:items-start  '>
                     <form className=' w-full gap-3 p-1 flex justify-center  items-center   flex-col     sm:p-1  md:gap-7 ' action="">
                         <div className='flex justify-between  items-center  w-full sm:justify-around md:justify-between md:flex-col  md:gap-3  '>
@@ -84,13 +89,16 @@ console.log(formData , "esto es formData");
 
                     </form>
                 </header>
-                {busqueda ? (
-                    <TableSearch allCountries={allCountries} busqueda={busqueda}></TableSearch>
+                {busqueda || formData.independent !== false ||formData.unMember !== false || formData.region!== "All" ||formData.sortBy !== "All" ? (
+                    <TableSearch allCountries={allCountries} formData={formData} busqueda={busqueda}></TableSearch>
                 ) : (
                     <Table allCountries={allCountries}></Table>
                 )}
 
+
             </div>
         </section>
+
+
     )
 }
