@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaEye } from "react-icons/fa";
 
 const Table = ({ allCountries }) => {
     // Definir el número de países que se mostrarán por página
@@ -37,6 +39,7 @@ const Table = ({ allCountries }) => {
                     {allCountries && allCountries.slice(startIndex, endIndex).map((country) => {
 
                         return (
+
                             <tr className=' animate-fade-in-up  hover:bg-gray-400' key={country.name.common}>
                                 <td className='py-5 text-xs text-center flex justify-center  items-center '>
                                     <img className='w-1/3 md:w-1/4  rounded-sm' src={country.flags.png} alt="" />
@@ -44,7 +47,9 @@ const Table = ({ allCountries }) => {
                                 <td className='text-xs py-5 text-semibold text-center md:text-sm '>{country.name.common}</td>
                                 <td className='text-xs py-5 text-semibold text-center md:text-sm '>{country.population}</td>
                                 <td className='text-xs py-5 text-semibold text-center md:text-sm '>{country.area}</td>
+                                <td><Link to={`/${country.name.common}`} className='text-xs md:text-xl px-2'><FaEye /></Link></td>
                             </tr>
+
                         )
                     })}
                 </tbody>
