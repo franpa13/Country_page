@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import "./CountryPage.css"
+import { FaWindowClose } from "react-icons/fa";
+import { ImCheckboxChecked } from "react-icons/im";
 export default function CountryPage({ allCountries }) {
   let { name } = useParams()
   const [country, setCountry] = useState({})
@@ -25,7 +28,7 @@ export default function CountryPage({ allCountries }) {
   const lastLanguage = lastLanguageKey ? filteredCountry[0].languages[lastLanguageKey] : null;
 
   return (
-    <div>
+    <div className=' contenedor '>
       <header className='bg-black  md:p-4 flex justify-between items-center'>
         <Link to={"/"} className='bg-black'>
 
@@ -33,33 +36,62 @@ export default function CountryPage({ allCountries }) {
         </Link>
         <img src="/hero-image-wr.jpg" className='w-1/2 md:w-1/6 ' alt="" />
       </header>
-      <section className='p-3'>
+      <section className='p-3 md:p-0 animate-slide-out-top'>
         {filteredCountry && filteredCountry.map((country) => {
-          console.log(country);
+      
           return (
-            <div key={country.name.common} className='flex flex-col justify-around gap-6'>
-              <div className='flex justify-around gap-3'>
+            <div key={country.name.common} className='flex flex-col justify-around gap-6 md:flex-row md:gap-12'>
+              <div className='flex justify-around gap-3 md:justify-center md:flex-col md:items-center md:w-2/3 md:mt-4'>
 
-                <img className='w-1/3 ' src={country.flags.png} alt="" />
+                <img className='w-1/3 md:w-full md:p-2' src={country.flags.png} alt="" />
                 <div className='flex flex-col gap-3'>
 
-                  <h1 className='text-base'>Nombre :  {country.name.common}</h1>
-                  <span className='text-base'>Capital :  {country.capital}</span>
-                  <span className='text-base'>Continent :  {country.continents}</span>
+                  <h1 className='text-base  font-semibold md:text-2xl'>Nombre :  {country.name.common}</h1>
+                  <span className='text-base font-semibold md:text-2xl'>Capital :  {country.capital}</span>
+                  <span className='text-base  font-semibold md:text-2xl'>Continent :  {country.continents}</span>
                 </div>
               </div>
-              <div className='flex w-full flex-col gap-4'>
-                <div className='flex w-full justify-between'>
-                  <span className='text-base'>Currency : {money} </span>
-                  <span className='text-base'>Symbol : {simbolo}</span>
+              <div className='flex w-full flex-col gap-4 md:mt-4'>
+                <div className='flex w-full justify-between md:justify-start md:gap-24'>
+                  <span className='text-base md:text-xl font-semibold'>Currency : {money} </span>
+                  <span className='text-base md:text-xl font-semibold'>Symbol : {simbolo}</span>
 
                 </div>
                 <div className='flex flex-col gap-4'>
 
-                  <span className='text-base'>Languages :{ `  ${lastLanguage} /  ${firstLanguage}`}</span>
-                  <span className='text-base'>Population : {country.population}</span>
-                  <span className='text-base'>Timezones : {country.timezones}</span>
+                  <span className='text-base md:text-xl font-semibold'>Languages :{`  ${lastLanguage} /  ${firstLanguage}`}</span>
+                  <span className='text-base md:text-xl font-semibold'>Population : {country.population}</span>
+                  <span className='text-base md:text-xl font-semibold'>Timezones : {country.timezones}</span>
+                  <span className='text-base md:text-xl font-semibold'>Area (km²) : {country.area}</span>
+                  <div className='flex flex-col gap-3'>
+                    <span className='text-base md:text-xl font-semibold'>bordering countries :</span>
+                    <ul className='flex justify-center'>
+                      {country.borders ? country.borders.map((limi, index) => {
+                        return (
+
+                          <li key={index} className='md:text-xl font-semibold'>
+                            {` ${limi} -`}
+                          </li>
+
+                        )
+                      }) : (
+                        <span className='md:text-xl font-semibold'>No tiene</span>
+                      )}
+                    </ul>
+                  </div>
+                  <div className='flex gap-2  items-center '>
+
+                    <span className='text-base  md:text-xl font-semibold'> UnMember : </span>
+                    {country.unMember && country.unMember === true ? (
+                      <ImCheckboxChecked className='bg-blue-900 md:text-xl' />
+                    ) : (
+                      <FaWindowClose className='bg-blue-900 md:text-xl' />
+                    )}
+                  </div>
                 </div>
+                <span className='text-base md:text-xl font-semibold'>Fifa : {country.fifa}</span>
+                <span className='text-base md:text-xl font-semibold'>Tld : {country.tld}</span>
+                <span className='text-base md:text-xl font-semibold'>startOfWeek : {country.startOfWeek}</span>
               </div>
             </div>
           )

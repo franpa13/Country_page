@@ -40,14 +40,14 @@ const Table = ({ allCountries }) => {
 
                         return (
 
-                            <tr className=' animate-fade-in-up  hover:bg-gray-400' key={country.name.common}>
-                                <td className='py-5 text-xs text-center flex justify-center  items-center '>
-                                    <img className='w-1/3 md:w-1/4  rounded-sm' src={country.flags.png} alt="" />
-                                </td>
-                                <td className='text-xs py-5 text-semibold text-center md:text-sm '>{country.name.common}</td>
-                                <td className='text-xs py-5 text-semibold text-center md:text-sm '>{country.population}</td>
-                                <td className='text-xs py-5 text-semibold text-center md:text-sm '>{country.area}</td>
-                                <td><Link to={`/${country.name.common}`} className='text-xs md:text-xl px-2'><FaEye /></Link></td>
+                            <tr className=' animate-fade-in-up  ' key={country.name.common}>
+                                            <td className='py-5 text-xs text-center flex justify-center  items-center hover:bg-gray-100 hover:text-black '>
+                                            <img className='w-1/3 md:w-1/4  rounded-sm' src={country.flags.png} alt="" />
+                                        </td>
+                                        <td className='text-xs py-5 font-semibold text-center md:text-sm hover:bg-gray-100 hover:text-black'>{country.name.common}</td>
+                                        <td className='text-xs py-5 font-semibold text-center md:text-sm hover:bg-gray-100 hover:text-black'>{country.population}</td>
+                                        <td className='text-xs py-5 font-semibold text-center md:text-sm hover:bg-gray-100 hover:text-black'>{country.area}</td>
+                                        <td className='flex justify-center w-full'><Link to={`/${country.name.common}`} className='text-xs md:text-xl mx-2 animate-pulse font-semibold flex justify-center w-full '><FaEye /></Link></td>
                             </tr>
 
                         )
