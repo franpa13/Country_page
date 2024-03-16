@@ -86,10 +86,11 @@ export default function FilteredTable({ allCountries, formData }) {
             </table>
             <p className='w-full flex justify-center items-center'>
                 {filteredCountries.length >= 1 && (
-                    <Box sx={{ width: "80%", display: "flex", flexDirection: "column", gap: "20px" }}>
+                    <Box sx={{ width: "100%", display: "flex", flexDirection: "column", gap: "20px" }}>
                         {[...Array(elementosSinEncontrar)].map((_, index) => (
                             <div className='w-full flex justify-between gap-10' key={index}>
-                                <Skeleton variant="circular" width={40} height={40} sx={{ backgroundColor: "#383838" }} />
+                               
+                                <Skeleton variant="text" sx={{ fontSize: '2rem', width: "100%" , backgroundColor: "#383838" }} />
                                 <Skeleton variant="text" sx={{ fontSize: '1rem', width: "100%", backgroundColor: "#383838" }} />
                             </div>
                         ))}
