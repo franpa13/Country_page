@@ -29,12 +29,12 @@ export default function CountryPage({ allCountries }) {
 
   return (
     <div className=' contenedor '>
-      <header className='bg-black  md:p-4 flex justify-between items-center'>
-        <Link to={"/"} className='bg-black'>
+      <header className='bg-black  md:p-4 flex justify-between p-0'>
+        <Link to={"/"} className='bg-black flex items-start'>
 
-          <img className='bg-black w-2/3 md:w-full' src="/Logo.svg" alt="" />
+          <img className='bg-black w-3/4 m-6 md:w-full' src="/Logo.svg" alt="" />
         </Link>
-        <img src="/hero-image-wr.jpg" className='w-1/2 md:w-1/6 ' alt="" />
+        <img src="/hero-image-wr.jpg" className='w-2/3 md:w-1/4 ' alt="" />
       </header>
       <section className='p-3 md:p-0 animate-slide-out-top'>
         {filteredCountry && filteredCountry.map((country) => {

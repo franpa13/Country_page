@@ -43,7 +43,7 @@ export default function Fathercomponent({ allCountries }) {
                             <h2 className='text-xs font-semibold       sm:text-base md:text-sm '>Found {allCountries && allCountries.length} countries</h2>
                             <div className='flex items-center form rounded-lg p-1 md:w-full'>
                                 <CiSearch className='text-gray-500 form md:text-xl' />
-                                <input onChange={(e) => setBusqueda(e.target.value)} placeholder='Search by Name, Region, Subregion' className='placeholder-gray-500 font-semibold text-xs outline-none p-1 form border-none       sm:text-base md:w-full md:text-sm ' type="text" />
+                                <input onChange={(e) => setBusqueda(e.target.value)} placeholder='Search by Name' className='placeholder-gray-500 font-semibold text-xs outline-none p-1 form border-none       sm:text-base md:w-full md:text-sm ' type="text" />
                             </div>
                         </div>
                         <div className='w-full flex flex-col justify-center items-start gap-3'>
