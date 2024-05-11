@@ -1,9 +1,3 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Country_page , REACT JS
+Proyecto donde consumo la api https://restcountries.com/v3.1/all , implementando las mejores practicas para realizar peticiones a la api , tambien usando material ui para los componentes y Tailwind css para los estilos, diseño responsive , ademas de la implementacion de react router dom para visualizar cada uno de los paises, junto con un buscados y filtros de poblacion y continentes
 # Country_page
