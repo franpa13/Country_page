@@ -8,15 +8,15 @@ export default function FilteredTable({ allCountries, formData }) {
 
     const filteredCountries = allCountries.filter(country => {
         console.log(country.region, "esto es region");
-        // Filtrar por región
+
         if (formData.region !== "All" && formData.region !== country.region) {
             return false;
         }
-        // Filtrar por membresía en la ONU
+   
         if (formData.unMember && !country.unMember) {
             return false;
         }
-        // Filtrar por independencia
+
         if (formData.independent && !country.independent) {
             return false;
         }
@@ -44,13 +44,13 @@ export default function FilteredTable({ allCountries, formData }) {
 
     // Función para cambiar la página
     const handlePageChange = (page) => {
-        // Verificar si el número de página está dentro de los límites
+     
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
         }
     };
 
-    // Calcular el índice inicial y final de los países a mostrar en la página actual
+  
     const startIndex = (currentPage - 1) * countriesPerPage;
     const endIndex = Math.min(startIndex + countriesPerPage, allCountries && allCountries.length);
 

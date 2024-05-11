@@ -1,26 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaEye } from "react-icons/fa";
-
+import { Skeleton, Box } from '@mui/material';
 const Table = ({ allCountries }) => {
-    // Definir el número de países que se mostrarán por página
+    const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const countriesPerPage = 10;
-
-    // Calcular el número total de páginas
     const totalPages = Math.ceil(allCountries && allCountries.length / countriesPerPage);
-
-    // Estado para mantener el número de página actual
     const [currentPage, setCurrentPage] = useState(1);
-
-    // Función para cambiar la página
     const handlePageChange = (page) => {
-        // Verificar si el número de página está dentro de los límites
+
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
         }
     };
 
-    // Calcular el índice inicial y final de los países a mostrar en la página actual
     const startIndex = (currentPage - 1) * countriesPerPage;
     const endIndex = Math.min(startIndex + countriesPerPage, allCountries && allCountries.length);
 
@@ -36,28 +29,44 @@ const Table = ({ allCountries }) => {
                     </tr>
                 </thead>
                 <tbody className=''>
-                    {allCountries && allCountries.slice(startIndex, endIndex).map((country) => {
+                    {allCountries ? allCountries.slice(startIndex, endIndex).map((country) => {
 
                         return (
 
                             <tr className=' animate-fade-in-up  ' key={country.name.common}>
-                                            <td className='py-5 text-xs text-center flex justify-center  items-center hover:bg-gray-100 hover:text-black '>
-                                            <img className='w-1/3 md:w-1/4  rounded-sm' src={country.flags.png} alt="" />
-                                        </td>
-                                        <td className='text-xs py-5 font-semibold text-center md:text-sm hover:bg-gray-100 hover:text-black'>{country.name.common}</td>
-                                        <td className='text-xs py-5 font-semibold text-center md:text-sm hover:bg-gray-100 hover:text-black'>{country.population}</td>
-                                        <td className='text-xs py-5 font-semibold text-center md:text-sm hover:bg-gray-100 hover:text-black'>{country.area}</td>
-                                        <td className='flex justify-center w-full'><Link to={`/${country.name.common}`} className='text-xs md:text-xl mx-2 animate-pulse font-semibold flex justify-center w-full '><FaEye /></Link></td>
+                                <td className='py-5 text-xs text-center flex justify-center  items-center hover:bg-gray-100 hover:text-black '>
+                                    <img className='w-1/3 md:w-1/4  rounded-sm' src={country.flags.png} alt="" />
+                                </td>
+                                <td className='text-xs py-5 font-semibold text-center md:text-sm hover:bg-gray-100 hover:text-black'>{country.name.common}</td>
+                                <td className='text-xs py-5 font-semibold text-center md:text-sm hover:bg-gray-100 hover:text-black'>{country.population}</td>
+                                <td className='text-xs py-5 font-semibold text-center md:text-sm hover:bg-gray-100 hover:text-black'>{country.area}</td>
+                                <td className='flex justify-center w-full'><Link to={`/${country.name.common}`} className='text-xs md:text-xl mx-2 animate-pulse font-semibold flex justify-center w-full '><FaEye /></Link></td>
                             </tr>
 
                         )
-                    })}
+                    }) : (
+
+                        array.map((i, item) => {
+                            return (
+
+                                <tr key={item}>
+                                    <td className='text-xs py-3 font-semibold text-center md:text-sm  hover:text-black'>    <Skeleton variant="text" height={45} sx={{ fontSize: '2rem', width: "100%", backgroundColor: "#383838" }} /></td>
+                                    <td className='text-xs py-3 font-semibold text-center md:text-sm  hover:text-black'>    <Skeleton variant="text" height={45} sx={{ fontSize: '2rem', width: "100%", backgroundColor: "#383838" }} /></td>
+                                    <td className='text-xs py-3 font-semibold text-center md:text-sm  hover:text-black'>    <Skeleton variant="text" height={45} sx={{ fontSize: '2rem', width: "100%", backgroundColor: "#383838" }} /></td>
+                                    <td className='text-xs py-3 font-semibold text-center md:text-sm  hover:text-black'>    <Skeleton variant="text" height={45} sx={{ fontSize: '2rem', width: "100%", backgroundColor: "#383838" }} /></td>
+                                    <td className='text-xs py-3 font-semibold text-center md:text-sm  hover:text-black'>    <Skeleton variant="text" height={45} sx={{ fontSize: '2rem', width: "100%", backgroundColor: "#383838" }} /></td>
+                                </tr>
+                            )
+                        })
+
+
+                    )}
                 </tbody>
             </table>
 
             {/* Menú de navegación */}
             <div className='flex p-2 justify-center gap-5 w-full items-center'>
-                {/* Botón de página anterior */}
+
                 <svg
                     className="w-4 h-4 cursor-pointer rtl:rotate-180"
                     onClick={() => handlePageChange(currentPage - 1)}
